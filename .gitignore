@@ -1,3 +1,7 @@
+#marcin's virtualenv
+/koziolenv
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
