@@ -1,6 +1,3 @@
-#ignore raw datasets i.e kaggle
-src/data/raw/
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
