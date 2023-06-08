@@ -11,6 +11,9 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
+import mlflow
+from kedro_mlflow.io.metrics import MlflowMetricDataSet
+
 
 def feature_scaling(data: pd.DataFrame) -> pd.DataFrame:
     COLUMNS = [
@@ -83,3 +86,10 @@ def evaluate_model(model: DecisionTreeClassifier, X_test: pd.DataFrame, y_test: 
     score = accuracy_score(y_test, y_pred)
     logger = logging.getLogger(__name__)
     logger.info("Model has a accuracy score of %.3f on test data.", score)
+    
+    #mlflow metric logging 
+    metric_ds = MlflowMetricDataSet(key="accuracy_score")
+    metric_ds.save(score)  # create a "score" value in the "metric" field in mlflow UI 
+
+
+
