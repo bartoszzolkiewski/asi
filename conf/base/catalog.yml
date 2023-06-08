@@ -6,16 +6,22 @@
 
 ## RAW ##
 application_data:
-  type: pandas.CSVDataSet
-  filepath: data/01_raw/application_data.csv
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+      type: pandas.CSVDataSet  # or any valid kedro DataSet
+      filepath: data/01_raw/application_data.csv # must be a local file, wherever you want to log the data in the end
 
 columns_description:
-  type: pandas.CSVDataSet
-  filepath: data/01_raw/columns_description.csv
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+      type: pandas.CSVDataSet  
+      filepath: data/01_raw/columns_description.csv
 
 previous_application:
-  type: pandas.CSVDataSet
-  filepath: data/01_raw/previous_application.csv
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+      type: pandas.CSVDataSet 
+      filepath: data/01_raw/previous_application.csv
 
 ## INTERMEDIATE ##
 previous_application_dropped:
@@ -50,7 +56,9 @@ model_input_scaled:
   filepath: data/05_model_input/model_input_scaled.pq
 
 ## MODELS ##
+
 decision_tree:
-  type: pickle.PickleDataSet
-  filepath: data/06_models/decision_tree.pickle
-  versioned: true
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pickle.PickleDataSet
+    filepath: data/06_models/decision_tree.pkl

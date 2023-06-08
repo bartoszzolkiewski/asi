@@ -18,3 +18,4 @@ pyarrow
 fastparquet
 black[jupyter]
 kedro-viz
+kedro-mlflow
