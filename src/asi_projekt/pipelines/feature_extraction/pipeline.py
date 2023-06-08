@@ -21,6 +21,6 @@ def create_pipeline(**kwargs) -> Pipeline:
                 inputs="feature_dataframe",
                 outputs="model_input",
                 name="attach_dummies_for_categorical_node",
-            )
+            ),
         ]
     )

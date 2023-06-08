@@ -45,3 +45,12 @@ model_input:
   type: pandas.ParquetDataSet
   filepath: data/05_model_input/model_input.pq
 
+model_input_scaled:
+  type: pandas.ParquetDataSet
+  filepath: data/05_model_input/model_input_scaled.pq
+
+## MODELS ##
+decision_tree:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/decision_tree.pickle
+  versioned: true
