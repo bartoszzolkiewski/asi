@@ -1,5 +1,5 @@
 """
-This is a boilerplate pipeline 'decision_tree'
+This is a boilerplate pipeline 'decision_forest'
 generated using Kedro 0.18.9
 """
 import logging
@@ -7,7 +7,7 @@ from typing import Dict, Tuple
 
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
@@ -74,20 +74,22 @@ def split_data(data: pd.DataFrame, parameters: Dict) -> Tuple:
     return X_train, X_test, y_train, y_test
 
 
-def train_model(X_train: pd.DataFrame, y_train: pd.Series) -> DecisionTreeClassifier:
-    from sklearn.tree import DecisionTreeClassifier
-
-    model = DecisionTreeClassifier()
+def train_model(X_train: pd.DataFrame, y_train: pd.Series) -> RandomForestClassifier:
+    model = RandomForestClassifier()
     model.fit(X_train, y_train)
 
     return model
 
 
-def evaluate_model(model: DecisionTreeClassifier, X_test: pd.DataFrame, y_test: pd.Series):
+def evaluate_model(model: RandomForestClassifier, X_test: pd.DataFrame, y_test: pd.Series):
     y_pred = model.predict(X_test)
     score = accuracy_score(y_test, y_pred)
     logger = logging.getLogger(__name__)
     logger.info("Model has a accuracy score of %.3f on test data.", score)
+
+    # mlflow metric logging
+    metric_ds = MlflowMetricDataSet(key="accuracy_score")
+    metric_ds.save(score)  # create a "score" value in the "metric" field in mlflow UI
 
     # Infer the model signature
     signature = infer_signature(X_test, y_pred)
@@ -100,5 +102,5 @@ def evaluate_model(model: DecisionTreeClassifier, X_test: pd.DataFrame, y_test: 
         sk_model=model,
         artifact_path="sklearn-model",
         signature=signature,
-        registered_model_name="sk-learn-decision-tree-reg-model",
+        registered_model_name="sk-learn-decision-forest-reg-model",
     )

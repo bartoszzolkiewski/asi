@@ -62,3 +62,9 @@ decision_tree:
   data_set:
     type: pickle.PickleDataSet
     filepath: data/06_models/decision_tree.pkl
+  
+decision_forest:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pickle.PickleDataSet
+    filepath: data/06_models/decision_forest.pkl
