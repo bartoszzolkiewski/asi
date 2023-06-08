@@ -112,4 +112,13 @@ def fix_merged_na(merged_df: pd.DataFrame) -> pd.DataFrame:
 
     # Rest missing values are under 1.5% so we can drop these rows.
     merged_df.dropna(inplace=True)
+
+    varlist = ["FLAG_OWN_CAR", "FLAG_OWN_REALTY", "FLAG_LAST_APPL_PER_CONTRACT"]
+
+    # Defining the map function
+    def binary_map(x):
+        return x.map({"Y": 1, "N": 0})
+
+    # Applying the function to the housing list
+    merged_df[varlist] = merged_df[varlist].apply(binary_map)
     return merged_df.drop(["SK_ID_PREV"], axis=1)
