@@ -1,0 +1,22 @@
+[tool.kedro]
+package_name = "asi_projekt"
+project_name = "ASI Projekt"
+kedro_init_version = "0.18.3"
+
+[tool.isort]
+profile = "black"
+
+[tool.black]
+line-length = 120
+target-version = ['py310']
+include = '\.pyi?$'
+
+[tool.pytest.ini_options]
+addopts = """
+--cov-report term-missing \
+--cov src/asi_projekt -ra"""
+
+[tool.coverage.report]
+fail_under = 0
+show_missing = true
+exclude_lines = ["pragma: no cover", "raise NotImplementedError"]

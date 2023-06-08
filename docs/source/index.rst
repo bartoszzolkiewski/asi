@@ -1,19 +1,14 @@
-.. ASI3 documentation master file, created by
-   sphinx-quickstart.
+.. asi_projekt documentation master file, created by sphinx-quickstart.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-ASI3 documentation!
-==============================================
-
-Contents:
+Welcome to project asi_projekt's API docs!
+=============================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
-   getting-started
-   commands
-
+   modules
 
 
 Indices and tables
