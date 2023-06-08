@@ -1,0 +1,118 @@
+"""
+This is a boilerplate pipeline 'feature_extraction'
+generated using Kedro 0.18.9
+"""
+import pandas as pd
+
+
+def set_column_types(dataframe: pd.DataFrame) -> pd.DataFrame:
+    COLUMNS = [
+        "FLAG_OWN_CAR",
+        "FLAG_OWN_REALTY",
+        "FLAG_MOBIL",
+        "FLAG_EMP_PHONE",
+        "FLAG_WORK_PHONE",
+        "FLAG_CONT_MOBILE",
+        "FLAG_PHONE",
+        "FLAG_EMAIL",
+        "REGION_RATING_CLIENT",
+        "REGION_RATING_CLIENT_W_CITY",
+        "REG_REGION_NOT_LIVE_REGION",
+        "REG_REGION_NOT_WORK_REGION",
+        "LIVE_REGION_NOT_WORK_REGION",
+        "REG_CITY_NOT_LIVE_CITY",
+        "REG_CITY_NOT_WORK_CITY",
+        "FLAG_DOCUMENT_2",
+        "FLAG_DOCUMENT_3",
+        "FLAG_DOCUMENT_4",
+        "FLAG_DOCUMENT_5",
+        "FLAG_DOCUMENT_6",
+        "FLAG_DOCUMENT_7",
+        "FLAG_DOCUMENT_8",
+        "FLAG_DOCUMENT_9",
+        "FLAG_DOCUMENT_10",
+        "FLAG_DOCUMENT_11",
+        "FLAG_DOCUMENT_12",
+        "FLAG_DOCUMENT_13",
+        "FLAG_DOCUMENT_14",
+        "FLAG_DOCUMENT_15",
+        "FLAG_DOCUMENT_16",
+        "FLAG_DOCUMENT_17",
+        "FLAG_DOCUMENT_18",
+        "FLAG_DOCUMENT_19",
+        "FLAG_DOCUMENT_20",
+        "FLAG_DOCUMENT_21",
+        "NFLAG_INSURED_ON_APPROVAL",
+    ]
+    dataframe[COLUMNS] = dataframe[COLUMNS].astype("category")
+
+    return dataframe
+
+
+def attach_dummies(dataframe: pd.DataFrame) -> pd.DataFrame:
+    COLUMNS = [
+        "FLAG_OWN_CAR",
+        "FLAG_OWN_REALTY",
+        "FLAG_MOBIL",
+        "FLAG_EMP_PHONE",
+        "FLAG_WORK_PHONE",
+        "FLAG_CONT_MOBILE",
+        "FLAG_PHONE",
+        "FLAG_EMAIL",
+        "REGION_RATING_CLIENT",
+        "REGION_RATING_CLIENT_W_CITY",
+        "REG_REGION_NOT_LIVE_REGION",
+        "REG_REGION_NOT_WORK_REGION",
+        "LIVE_REGION_NOT_WORK_REGION",
+        "REG_CITY_NOT_LIVE_CITY",
+        "REG_CITY_NOT_WORK_CITY",
+        "FLAG_DOCUMENT_2",
+        "FLAG_DOCUMENT_3",
+        "FLAG_DOCUMENT_4",
+        "FLAG_DOCUMENT_5",
+        "FLAG_DOCUMENT_6",
+        "FLAG_DOCUMENT_7",
+        "FLAG_DOCUMENT_8",
+        "FLAG_DOCUMENT_9",
+        "FLAG_DOCUMENT_10",
+        "FLAG_DOCUMENT_11",
+        "FLAG_DOCUMENT_12",
+        "FLAG_DOCUMENT_13",
+        "FLAG_DOCUMENT_14",
+        "FLAG_DOCUMENT_15",
+        "FLAG_DOCUMENT_16",
+        "FLAG_DOCUMENT_17",
+        "FLAG_DOCUMENT_18",
+        "FLAG_DOCUMENT_19",
+        "FLAG_DOCUMENT_20",
+        "FLAG_DOCUMENT_21",
+        "NFLAG_INSURED_ON_APPROVAL",
+        "NAME_CONTRACT_TYPE_x",
+        "CODE_GENDER",
+        "NAME_TYPE_SUITE_x",
+        "NAME_INCOME_TYPE",
+        "NAME_EDUCATION_TYPE",
+        "NAME_FAMILY_STATUS",
+        "NAME_HOUSING_TYPE",
+        "WEEKDAY_APPR_PROCESS_START_x",
+        "ORGANIZATION_TYPE",
+        "NAME_CONTRACT_TYPE_y",
+        "WEEKDAY_APPR_PROCESS_START_y",
+        "NAME_CASH_LOAN_PURPOSE",
+        "NAME_CONTRACT_STATUS",
+        "NAME_PAYMENT_TYPE",
+        "CODE_REJECT_REASON",
+        "NAME_TYPE_SUITE_y",
+        "NAME_CLIENT_TYPE",
+        "NAME_GOODS_CATEGORY",
+        "NAME_PORTFOLIO",
+        "NAME_PRODUCT_TYPE",
+        "CHANNEL_TYPE",
+        "NAME_SELLER_INDUSTRY",
+        "NAME_YIELD_GROUP",
+        "PRODUCT_COMBINATION",
+    ]
+    dummies = pd.get_dummies(dataframe[COLUMNS], drop_first=True)
+    dataframe = pd.concat([dataframe, dummies], axis=1)
+
+    return dataframe.drop(COLUMNS, axis=1)
