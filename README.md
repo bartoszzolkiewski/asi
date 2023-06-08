@@ -31,6 +31,13 @@ You can run MLFlow UI with:
 docker compose run mlflow_server
 ```
 
+## How to start mlflow ui
+
+```
+kedro mlflow ui
+```
+
+
 ## How to run your Kedro pipeline
 
 You can run your Kedro project with:
