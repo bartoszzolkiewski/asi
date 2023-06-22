@@ -1,0 +1,37 @@
+# docker-compose.yml
+version: '2'
+
+services:
+  mlflow_server:
+    build: 
+      context: ./.docker/mlflow_server
+      dockerfile: Dockerfile
+    environment:
+      - BACKEND_URI=/mlflow/store
+      - ARTIFACT_ROOT=/mlflow/mlflow-artifacts
+    ports:
+      - "8888:5000"
+    volumes:
+      - mlflow_server_store:/mlflow
+    networks:
+      - backend
+
+  kedro_pipeline:
+    build: 
+      context: .
+      dockerfile: ./.docker/asi_project/Dockerfile
+    networks:
+      - backend
+    volumes:
+      - mlflow_server_store:/mlflow
+      - ./:/kedro
+    depends_on:
+      - mlflow_server
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow_server:5000
+    command: kedro run
+volumes:
+  mlflow_server_store:
+
+networks:
+  backend:

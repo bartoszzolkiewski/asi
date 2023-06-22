@@ -1,15 +1,15 @@
-black~=22.0
-flake8>=3.7.9, <5.0
-ipython>=7.31.1, <8.0
-isort~=5.0
-jupyter~=1.0
-jupyterlab~=3.0
-kedro~=0.18.3
-kedro-telemetry~=0.2.0
-nbstripout~=0.4
-pytest-cov~=3.0
-pytest-mock>=1.7.1, <2.0
-pytest~=6.2
+black
+flake8
+ipython
+isort
+jupyter
+jupyterlab
+kedro
+kedro-telemetry
+nbstripout
+pytest-cov
+pytest-mock
+pytest
 
 scikit-learn
 pandas
@@ -19,3 +19,4 @@ fastparquet
 black[jupyter]
 kedro-viz
 kedro-mlflow
+optuna

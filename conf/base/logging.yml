@@ -43,5 +43,8 @@ loggers:
   asi_projekt:
     level: INFO
 
+  mlflow:
+    level: DEBUG
+
 root:
   handlers: [rich, info_file_handler, error_file_handler]

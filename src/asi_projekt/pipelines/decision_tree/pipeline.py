@@ -6,7 +6,6 @@ generated using Kedro 0.18.9
 from kedro.pipeline import Pipeline, node, pipeline
 from asi_projekt.pipelines.decision_tree import nodes
 
-
 def create_pipeline(**kwargs) -> Pipeline:
     return pipeline(
         [
@@ -19,7 +18,7 @@ def create_pipeline(**kwargs) -> Pipeline:
             node(
                 func=nodes.evaluate_model,
                 inputs=["decision_tree", "X_test", "y_test"],
-                outputs=None,
+                outputs="decision_tree_metrics",
                 name="evaluate_decision_tree_model_node",
             ),
         ]
