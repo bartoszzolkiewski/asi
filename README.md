@@ -15,6 +15,14 @@ In order to get the best out of the template:
 * Don't commit data to your repository
 * Don't commit any credentials or your local configuration to your repository. Keep all your credentials and local configuration in `conf/local/`
 
+## How to work with DVC
+
+You can download latest version of datasets by running:
+
+```
+dvc pull
+```
+
 ## How to run MLFlow UI
 
 You can run MLFlow UI with:

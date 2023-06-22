@@ -18,6 +18,7 @@ mlruns/**
 # except their sub-folders
 !data/**/
 !logs/**/
+!data/01_raw/*.dvc
 
 # also keep all .gitkeep files
 !.gitkeep
