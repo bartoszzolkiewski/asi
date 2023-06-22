@@ -10,15 +10,9 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import GridSearchCV
 
 
-def train_model(X_train: pd.DataFrame, y_train: pd.Series) -> DecisionTreeClassifier:
+def train_model(X_train: pd.DataFrame, y_train: pd.Series, grid_search_params: dict) -> DecisionTreeClassifier:
 	model = DecisionTreeClassifier()
-	param_grid = {
-		"min_samples_split": [2, 3, 4, 5],
-		"min_samples_leaf": [2, 3, 4, 5],
-        "splitter": ['best'],
-	}
-    
-	grid_search = GridSearchCV(model, param_grid, cv=3, n_jobs=-1, verbose=10)
+	grid_search = GridSearchCV(model, grid_search_params, cv=3, n_jobs=-1, verbose=10)
 	grid_search.fit(X_train, y_train)
 	return grid_search.best_estimator_
 

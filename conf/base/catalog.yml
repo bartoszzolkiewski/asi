@@ -47,6 +47,7 @@ feature_dataframe:
   filepath: data/04_feature/feature_dataframe.pq
 
 ## MODEL INPUT ##
+
 model_input:
   type: pandas.ParquetDataSet
   filepath: data/05_model_input/model_input.pq
@@ -54,22 +55,6 @@ model_input:
 model_input_scaled:
   type: pandas.ParquetDataSet
   filepath: data/05_model_input/model_input_scaled.pq
-
-X_train:
-  type: pandas.ParquetDataSet
-  filepath: data/05_model_input/X_train.pq
-
-X_test:
-  type: pandas.ParquetDataSet
-  filepath: data/05_model_input/X_test.pq
-
-y_train:
-  type: pandas.ParquetDataSet
-  filepath: data/05_model_input/y_train.pq
-
-y_test:
-  type: pandas.ParquetDataSet
-  filepath: data/05_model_input/y_test.pq
 
 ## MODELS ##
 

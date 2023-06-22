@@ -11,7 +11,7 @@ def create_pipeline(**kwargs) -> Pipeline:
         [
             node(
                 func=nodes.train_model,
-                inputs=["X_train", "y_train"],
+                inputs=["X_train", "y_train", "params:grid_search_options"],
                 outputs="decision_tree",
                 name="train_decision_tree_model_node",
             ),

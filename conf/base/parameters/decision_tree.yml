@@ -8,3 +8,17 @@ model_options:
   test_size: 0.2
   random_state: 3
   target: TARGET
+
+grid_search_options:
+  min_samples_split:
+    - 2
+    - 3
+    - 4
+    - 5
+  min_samples_leaf:
+    - 2
+    - 3
+    - 4
+    - 5
+  splitter:
+    - best
