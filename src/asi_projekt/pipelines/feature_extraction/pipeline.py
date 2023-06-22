@@ -22,5 +22,17 @@ def create_pipeline(**kwargs) -> Pipeline:
                 outputs="model_input",
                 name="attach_dummies_for_categorical_node",
             ),
+            node(
+                func=nodes.feature_scaling,
+                inputs="model_input",
+                outputs="model_input_scaled",
+                name="scale_features_node",
+            ),
+            node(
+                func=nodes.split_data,
+                inputs=["model_input_scaled", "params:model_options"],
+                outputs=["X_train", "X_test", "y_train", "y_test"],
+                name="split_data_node",
+            ),
         ]
     )

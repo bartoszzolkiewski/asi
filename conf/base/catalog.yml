@@ -55,16 +55,30 @@ model_input_scaled:
   type: pandas.ParquetDataSet
   filepath: data/05_model_input/model_input_scaled.pq
 
+X_train:
+  type: pandas.ParquetDataSet
+  filepath: data/05_model_input/X_train.pq
+
+X_test:
+  type: pandas.ParquetDataSet
+  filepath: data/05_model_input/X_test.pq
+
+y_train:
+  type: pandas.ParquetDataSet
+  filepath: data/05_model_input/y_train.pq
+
+y_test:
+  type: pandas.ParquetDataSet
+  filepath: data/05_model_input/y_test.pq
+
 ## MODELS ##
 
 decision_tree:
-  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
-  data_set:
-    type: pickle.PickleDataSet
-    filepath: data/06_models/decision_tree.pkl
-  
-decision_forest:
-  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
-  data_set:
-    type: pickle.PickleDataSet
-    filepath: data/06_models/decision_forest.pkl
+    type: kedro_mlflow.io.models.MlflowModelLoggerDataSet
+    flavor: mlflow.sklearn
+    artifact_path: decision_tree
+
+## METRICS ##
+
+decision_tree_metrics:
+  type: kedro_mlflow.io.metrics.MlflowMetricsDataSet
