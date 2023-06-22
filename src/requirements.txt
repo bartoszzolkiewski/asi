@@ -19,4 +19,5 @@ fastparquet
 black[jupyter]
 kedro-viz
 kedro-mlflow
-optuna
+dvc
+dvc-gdrive
