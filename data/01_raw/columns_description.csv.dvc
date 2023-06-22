@@ -1,0 +1,5 @@
+outs:
+- md5: b2aef563c999c13f6d1e327cf3d8775e
+  size: 28348
+  hash: md5
+  path: columns_description.csv
