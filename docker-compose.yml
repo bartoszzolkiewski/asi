@@ -6,6 +6,7 @@ services:
     build: 
       context: ./.docker/mlflow_server
       dockerfile: Dockerfile
+    container_name: mlflow_server
     environment:
       - BACKEND_URI=/mlflow/store
       - ARTIFACT_ROOT=/mlflow/mlflow-artifacts
@@ -29,7 +30,48 @@ services:
       - mlflow_server
     environment:
       - MLFLOW_TRACKING_URI=http://mlflow_server:5000
-    command: kedro run
+  
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./.docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./.docker/prometheus/prometheus.rules.yml:/etc/prometheus/prometheus.rules.yml:ro
+    depends_on:
+      - cadvisor
+    networks:
+      - backend
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.47.1
+    container_name: cadvisor
+    privileged: true
+    platform: linux/aarch64
+    ports:
+      - 8080:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    depends_on:
+      - redis
+    networks:
+      - backend
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - 6379:6379
+    networks:
+      - backend
+
 volumes:
   mlflow_server_store:
 
