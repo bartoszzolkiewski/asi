@@ -5,3 +5,5 @@
 ['remote "gdrive_remote"']
     url = gdrive://1HBctoFyLE3YrUTisEYXBcite1Wgg2ank/store
     gdrive_acknowledge_abuse = true
+    gdrive_use_service_account = true    
+    gdrive_service_account_json_file_path=/Users/bartekzolkiewski/Documents/PJATK/asi/asi-projekt-14079a35e353.json
