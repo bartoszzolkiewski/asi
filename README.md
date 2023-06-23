@@ -1,21 +1,12 @@
 # ASI Projekt
 
-## Prerequisites
-
-You have to have pyenv installed and created a virtualenv.
-Then install requirements:
-
-```
-pip install -r src/requirements.txt
-```
-
 ## Quickstart
 
 First place gcp SA .json credentials file in project root, then
 to install project locally, run this command:
 
 ```
-source init.sh
+./init.sh
 ```
 
 This script will build docker images and pull datasets for you.
@@ -23,19 +14,34 @@ This script will build docker images and pull datasets for you.
 ## Run the pipeline
 
 ```
-docker-compose run kedro_pipeline
+docker-compose run kedro_pipeline kedro run
 ```
 
-## Run MLFlow UI
+## Run MLFlow UI and deps
 MLFlow UI will be available at http://127.0.0.1:8888
+Prometheus UI will be available at http://127.0.0.1:9090
 ```
-docker-compose run mlflow_server
+docker-compose up
 ```
 
-## How to work with DVC
+## Development
 
-You can download latest version of datasets by running:
+Development environment is fully encased in docker container. 
+To attatch a shell to the container run:
 
 ```
-dvc pull
+docker compose run kedro_pipeline bash
+```
+
+## Dataset changes
+
+After changing the datasets it's important to use DVC to store the new version:
+
+```
+dvc add <target>
+dvc push
+```
+to download newest dataset version run:
+```
+dvc pull or ./init.sh
 ```
