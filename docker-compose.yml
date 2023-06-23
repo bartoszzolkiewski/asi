@@ -21,6 +21,7 @@ services:
     build: 
       context: .
       dockerfile: ./.docker/asi_project/Dockerfile
+    container_name: kedro_pipeline
     networks:
       - backend
     volumes:
@@ -40,7 +41,6 @@ services:
       - --config.file=/etc/prometheus/prometheus.yml
     volumes:
       - ./.docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-      - ./.docker/prometheus/prometheus.rules.yml:/etc/prometheus/prometheus.rules.yml:ro
     depends_on:
       - cadvisor
     networks:
