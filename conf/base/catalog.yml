@@ -56,6 +56,12 @@ model_input_scaled:
   type: pandas.ParquetDataSet
   filepath: data/05_model_input/model_input_scaled.pq
 
+model_schema:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+      type: pandas.ParquetDataSet 
+      filepath: data/05_model_input/model_schema.pq
+
 ## MODELS ##
 
 decision_tree:

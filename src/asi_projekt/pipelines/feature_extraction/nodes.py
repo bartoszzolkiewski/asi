@@ -204,8 +204,16 @@ def attach_dummies(dataframe: pd.DataFrame) -> pd.DataFrame:
     dummies.columns = dummies.columns.str.replace(',', '')
     dummies.columns = dummies.columns.str.replace('-', '_')
 
+<<<<<<< Updated upstream
 
     dataframe = pd.concat([dataframe, dummies], axis=1)
           
 
     return dataframe.drop(COLUMNS, axis=1)
+=======
+    return dataframe.drop(COLUMNS, axis=1)
+
+
+def export_schema(dataframe: pd.DataFrame) -> pd.DataFrame:
+    return dataframe.sample(5)
+>>>>>>> Stashed changes

@@ -29,6 +29,12 @@ def create_pipeline(**kwargs) -> Pipeline:
                 name="scale_features_node",
             ),
             node(
+                func=nodes.export_schema,
+                inputs="model_input_scaled",
+                outputs="model_schema",
+                name="export_schema_node",
+            ),
+            node(
                 func=nodes.split_data,
                 inputs=["model_input_scaled", "params:model_options"],
                 outputs=["X_train", "X_test", "y_train", "y_test"],
