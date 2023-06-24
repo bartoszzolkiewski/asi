@@ -2,7 +2,6 @@
 This is a boilerplate pipeline 'feature_extraction'
 generated using Kedro 0.18.9
 """
-import hopsworks
 import pandas as pd
 from sklearn.discriminant_analysis import StandardScaler
 from sklearn.model_selection import train_test_split
@@ -52,25 +51,6 @@ def feature_scaling(data: pd.DataFrame) -> pd.DataFrame:
     ]
     scaler = StandardScaler()
     data[COLUMNS] = scaler.fit_transform(data[COLUMNS])
-    
-    project = hopsworks.login()
-
-    fs = project.get_feature_store()
-
-
-    trans_fg = fs.get_or_create_feature_group(
-    name="test",
-    version=1,
-    description="Transaction data",
-    primary_key=['ID_COL'],
-    event_time=None,
-    online_enabled=True
-    )
-    
-    data_with_primary_key = data
-    data_with_primary_key['ID_COL'] = data_with_primary_key.index
-    # will crash if ran with whole dataset 
-    trans_fg.insert(data_with_primary_key.head(10))
 
     return data
 
@@ -192,20 +172,7 @@ def attach_dummies(dataframe: pd.DataFrame) -> pd.DataFrame:
         "NAME_YIELD_GROUP",
         "PRODUCT_COMBINATION",
     ]
-      
-    
     dummies = pd.get_dummies(dataframe[COLUMNS], drop_first=True)
-    
-    # data sanitization for feature store
-    dummies.columns = dummies.columns.str.upper()
-    dummies.columns = dummies.columns.str.replace(' ', '_')
-    dummies.columns = dummies.columns.str.replace('/', '')
-    dummies.columns = dummies.columns.str.replace(':', '')
-    dummies.columns = dummies.columns.str.replace(',', '')
-    dummies.columns = dummies.columns.str.replace('-', '_')
-
-
     dataframe = pd.concat([dataframe, dummies], axis=1)
-          
 
     return dataframe.drop(COLUMNS, axis=1)
